@@ -4,35 +4,36 @@ LIBS=
 EXENAME=hsh
 
 CFILES=\
-	alias1.c\
-	alias2.c\
+	aliasi.c\
+	aliasii.c\
 	inventory.c\
-	builtin_1.c\
-	builtin_2.c\
-	cd.c\
-	env1.c\
-	env2.c\
-	execute.c\
-	file_io.c\
-	free.c\
-	getline.c\
-	helper1.c\
-	helper2.c\
-	history.c\
-	mem.c\
-	parser_1.c\
-	parser_2.c\
-	link_path.c\
-	pipeline.c\
-	parsetree.c\
-	custom_stdlib.c\
-	str_funcs1.c\
-	str_funcs2.c\
-	str_funcs3.c\
-	tokenizer.c\
-	tokens.c\
-	processor.c\
-	printer.c
+	builtin_i.c\
+	builtin_ii.c\
+	memm.c\
+	parseri.c\
+	parserii.c\
+	str_funcsiii.c\
+	token_izer.c\
+	to_kens.c\
+	procesor.c\
+	print.c
+	link_pa_th.c\
+	pipe_line.c\
+	parse_tree.c\
+	cust_stdlib.c\
+	str_funcsi.c\
+	str_funcsii.c\
+	cede.c\
+	envi.c\
+	envii.c\
+	exe.c\
+	fi_le_io.c\
+	freeee.c\
+	get_line.c\
+	hel_per1.c\
+	hel_per2.c\
+	his_tory.c\
+	
 
 GLOBAL_HEADERS=\
 	shell.h
