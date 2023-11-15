@@ -11,7 +11,7 @@ unsigned int init_pipeline_count_processes(ptree_t *tree)
 	if (!tree)
 		return (0);
 
-	if (is_redirection(tree->token_id))
+	if (re_di_rec_tion(tree->token_id))
 		return (1);
 
 	if (tree->token_id == TO_KEN_STRING)
@@ -34,12 +34,12 @@ int init_pipeline_push_processes(pipeline_t *pipeline, ptree_t *tree)
 
 	if (!tree)
 		return (0);
-	if (is_redirection(tree->token_id))
+	if (re_di_rec_tion(tree->token_id))
 	{
 		pipeline->processes[pipeline->processesN].ptree = tree;
 		pipeline->processes[pipeline->processesN].io_redir = tree->token_id;
 		filename = safe_malloc(strlen(tree->right->strings[0]) + 1);
-		_strcpy(filename, (char *)tree->right->strings[0]);
+		_str_co_py(filename, (char *)tree->right->strings[0]);
 		pipeline->processes[pipeline->processesN].filename = filename;
 		pipeline->processesN++;
 		tree->token_id = TO_KEN_STRING;
@@ -87,7 +87,7 @@ int init_pipeline(pipeline_t *pipeline, ptree_t *ptree)
 	mem_needed = init_pipeline_count_processes(ptree);
 	if (mem_needed == 0)
 	{
-		_perror("No elements present in the pipeline!\n");
+		_process_err("No elements present in the pipeline!\n");
 		exit(1);
 	}
 
@@ -95,7 +95,7 @@ int init_pipeline(pipeline_t *pipeline, ptree_t *ptree)
 	pipeline->processes = safe_malloc(mem_needed * sizeof(process_t));
 	if (!pipeline->processes)
 	{
-		_perror("Memory allocation failed!\n");
+		_process_err("Memory allocation failed!\n");
 		exit(1);
 	}
 	/* initializes background service values */
@@ -106,7 +106,7 @@ int init_pipeline(pipeline_t *pipeline, ptree_t *ptree)
 	init_pipeline_push_processes(pipeline, ptree);
 	if (pipeline->processesN != mem_needed)
 	{
-		_perror("uhhhhh number of commands does not match\n");
+		_process_err("uhhhhh number of commands does not match\n");
 		exit(1);
 	}
 	for (i = 0; i < pipeline->processesN; i++)

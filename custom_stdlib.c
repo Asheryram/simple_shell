@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * _isspace - checks if input char is a space character
+ * _is_t_space - checks if input char is a space character
  * @c: input character
  *
  * Return: 1 on success, 0 on failure
  */
-char _isspace(char c)
+char _is_t_space(char c)
 {
 	int i;
 
@@ -25,12 +25,12 @@ char _isspace(char c)
 }
 
 /**
- * _atoi - returns integer values from string
+ * _a_to_oi - returns integer values from string
  * @s: input string
  *
  * Return: will return integer
  */
-int _atoi(char *s)
+int _a_to_oi(char *s)
 {
 	int result = 0, sign = 0, c;
 
@@ -49,27 +49,27 @@ int _atoi(char *s)
 }
 
 /**
- * _perror - custom perror
+ * _process_err - custom perror
  * @string: input error string to write to stderr
  *
  * Return: void
  */
-void _perror(char *string)
+void _process_err(char *string)
 {
 	unsigned int len;
 
-	len = _strlen(string);
+	len = _str_length(string);
 
 	write(STDERR_FILENO, string, len);
 }
 
 /**
- * _memmove - shifting an array
+ * _chg_mem_loc - shifting an array
  * @dest: dest
  * @src: source
  * @n: bytes to move
  */
-void _memmove(void *dest, void *src, size_t n)
+void _chg_mem_loc(void *dest, void *src, size_t n)
 {
 	char *copy_source, *copy_dest, *temp;
 	size_t i;
@@ -87,11 +87,11 @@ void _memmove(void *dest, void *src, size_t n)
 }
 
 /**
- * is_uint - checks if input string is unsigned int
+ * is_unsgn_int - checks if input string is unsigned int
  * @num: the input number
  * Return: TRUE_THY or FALSE_THY
  */
-int is_uint(char *num)
+int is_unsgn_int(char *num)
 {
 	int i = 0;
 

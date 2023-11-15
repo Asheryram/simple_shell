@@ -14,7 +14,7 @@ unsigned int write_history(history_t *head)
 	{
 		write_uint(head->number);
 		write(STDOUT_FILENO, "  ", 2);
-		write(STDOUT_FILENO, head->command, _strlen(head->command));
+		write(STDOUT_FILENO, head->command, _str_length(head->command));
 		head = head->next;
 		i++;
 	}
@@ -60,7 +60,7 @@ int write_uint(unsigned int n)
  */
 void _puts(char *str)
 {
-	write(STDOUT_FILENO, str, _strlen(str));
+	write(STDOUT_FILENO, str, _str_length(str));
 	_putchar('\n');
 }
 
@@ -82,20 +82,20 @@ int _putchar(char c)
  *
  * Return: number of nodes printed
  */
-size_t print_list(env_t *head)
+size_t print_list(env_ment *head)
 {
 	unsigned int i = 0;
-	char **_environ;
+	char **_env_mentiron;
 
-	_environ = link_to_dpointer(head);
+	_env_mentiron = link_to_poin_ter(head);
 
-	while (_environ[i])
+	while (_env_mentiron[i])
 	{
-		_puts(_environ[i]);
-		free(_environ[i]);
+		_puts(_env_mentiron[i]);
+		free(_env_mentiron[i]);
 		i++;
 	}
 
-	free(_environ);
+	free(_env_mentiron);
 	return (i);
 }

@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * _strncat - concatenates from src string to dest string
+ * _strn_cat - concatenates from src string to dest string
  * @dest: destination string
  * @src: source string
  * @n: number of bytes to concatenate
  *
  * Return: pointer to destination
  */
-char *_strncat(char *dest, char *src, int n)
+char *_strn_cat(char *dest, char *src, int n)
 {
 	int i = 0, j = 0;
 
@@ -28,14 +28,14 @@ char *_strncat(char *dest, char *src, int n)
 }
 
 /**
- * _strcmp - compares string
+ * _strg_com_pare - compares string
  * @s1: first string
  * @s2: second string
  *
  * Return: difference between two ascii valuves
  */
 
-int _strcmp(const char *s1, const char *s2)
+int _strg_com_pare(const char *s1, const char *s2)
 {
 	int i;
 
@@ -56,12 +56,12 @@ int _strcmp(const char *s1, const char *s2)
 }
 
 /**
- * _strlen - finds and returns length of string
+ * _str_length - finds and returns length of string
  * @str: string to find length
  *
  * Return: length of string
  */
-unsigned int _strlen(const char *str)
+unsigned int _str_length(const char *str)
 {
 	int i = 0;
 
@@ -72,12 +72,12 @@ unsigned int _strlen(const char *str)
 }
 
 /**
- * _strdup - takes a string and copies to another a new memory location
+ * _str_dupp - takes a string and copies to another a new memory location
  * @str: string to copy
  *
  * Return: pointer to copied string
  */
-char *_strdup(char *str)
+char *_str_dupp(char *str)
 {
 	unsigned int len, j;
 	char *ptrstring;
@@ -85,7 +85,7 @@ char *_strdup(char *str)
 	if (str == NULL)
 		return (NULL);
 
-	len = _strlen(str);
+	len = _str_length(str);
 
 	ptrstring = safe_malloc((len + 1) * sizeof(char));
 
@@ -97,14 +97,14 @@ char *_strdup(char *str)
 }
 
 /**
- * _strncmp - checks if 2 strings are of equal value and length
+ * _strng_com_pare - checks if 2 strings are of equal value and length
  * @s1: first string
  * @s2: second string
  * @n: number of bytes to compare
  *
  * Return: difference of first chars of diff value or 0 on success
  */
-int _strncmp(char *s1, char *s2, unsigned int n)
+int _strng_com_pare(char *s1, char *s2, unsigned int n)
 {
 	unsigned int j;
 

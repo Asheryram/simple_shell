@@ -6,17 +6,17 @@
  *
  * Return: 0 on success, 1 on failure
  */
-int freeall(arg_inventory_t *arginv)
+int freeall(arg_in_ven_tory_t *arginv)
 {
 	int exit_status;
 
 	if (arginv)
 	{
-		save_alias(arginv);
+		perm_ali_as(arginv);
 		file_history(arginv);
 		free_history(arginv->history);
 		free(arginv->history_file);
-		free_environ(arginv->envlist);
+		free_env_mentiron(arginv->env_list);
 		free_alias(arginv->alias);
 		free(arginv->alias_file);
 		if (arginv->input_commands)
@@ -50,14 +50,14 @@ int free_alias(alias_t *head)
 }
 
 /**
- * free_environ - function to free all allocated memory
- * @head: head of custom _environ
+ * free_env_mentiron - function to free all allocated memory
+ * @head: head of custom _env_mentiron
  *
  * Return: 0 on success, 1 on failure
  */
-int free_environ(env_t *head)
+int free_env_mentiron(env_ment *head)
 {
-	env_t *temp = head;
+	env_ment *temp = head;
 
 	while (head)
 	{

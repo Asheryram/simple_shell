@@ -16,7 +16,7 @@ typedef struct token
 
 /**
  * struct tokens - struct for tokenizing string
- * @tokens: array of token_t structs with tokenized strings and ids
+ * @tokens: array of token_t structs with gen_tokend strings and ids
  * @tokensN: amount of tokens parsed
  *
  * NOTE: do not deallocate everthing from here until the full parse tree
@@ -116,7 +116,7 @@ typedef struct env
   char *var;
   char *val;
   struct env *next;
-} env_t;
+} env_ment;
 
 /**
  * struct history - builds linked list of history of input commands
@@ -147,7 +147,7 @@ typedef struct alias
 /**
  * struct arg_inventory - inventory of support arguments for immediate access
  * @input_commands: string of input commands
- * @envlist: custom davinci environ linked list
+ * @env_list: custom davinci environ linked list
  * @buflimit: buflimit max of 1024 chars
  * @commands: double pointer to commands list
  * @st_mode: st_mode either FIFO or terminal
@@ -170,7 +170,7 @@ typedef struct alias
 typedef struct arg_inventory
 {
   char *input_commands;
-  env_t *envlist;
+  env_ment *env_list;
   char **commands;
   size_t buflimit;
   int st_mode;
@@ -192,7 +192,7 @@ typedef struct arg_inventory
 
   int exit;
   int exit_status;
-} arg_inventory_t;
+} arg_in_ven_tory_t;
 
 /**
  * struct _builtins - matches command to appropriate builtin function
@@ -202,7 +202,7 @@ typedef struct arg_inventory
 typedef struct _builtins
 {
   char *command;
-  int (*builtin_func)(arg_inventory_t *arginv);
+  int (*builtin_func)(arg_in_ven_tory_t *arginv);
 } builtins_t;
 
 /**

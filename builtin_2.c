@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * _alias - builtin func to set alias
+ * _al_ias - builtin func to set alias
  * @arginv: arguments inventory
  *
  * Return: 0 on success
  */
-int _alias(arg_inventory_t *arginv)
+int _al_ias(arg_in_ven_tory_t *arginv)
 {
 	char *input, **combo, **commands;
 
@@ -19,13 +19,13 @@ int _alias(arg_inventory_t *arginv)
 	}
 	else if (commands[2] != NULL)
 	{
-		_perror("alias: too many arguments.\n");
+		_process_err("alias: too many arguments.\n");
 		return (-1);
 	}
 
 	input = commands[1];
 
-	combo = separate_string(input);
+	combo = se_pa_rate_string(input);
 
 	if (modify_node_alias(&arginv->alias, combo[0], combo[1]) == EXT_FAILURE)
 		add_node_alias(&arginv->alias, combo[0], combo[1]);
@@ -37,12 +37,12 @@ int _alias(arg_inventory_t *arginv)
 }
 
 /**
- * _unalias - builtin func to unset alias
+ * _un_al_ias - builtin func to unset alias
  * @arginv: arguments inventory
  *
  * Return: 0 on success
  */
-int _unalias(arg_inventory_t *arginv)
+int _un_al_ias(arg_in_ven_tory_t *arginv)
 {
 	char **commands;
 
@@ -50,13 +50,13 @@ int _unalias(arg_inventory_t *arginv)
 
 	if (commands[1] == NULL)
 	{
-		_perror("unalias: missing arguments.\n");
+		_process_err("unalias: missing arguments.\n");
 		return (-1);
 	}
 
 	if (commands[2] != NULL)
 	{
-		_perror("unalias: too many arguments.\n");
+		_process_err("unalias: too many arguments.\n");
 		return (-1);
 	}
 
@@ -67,18 +67,18 @@ int _unalias(arg_inventory_t *arginv)
 }
 
 /**
- * shell_help - prints help commands info based on the other input argument
+ * she_ll_helper - prints help commands info based on the other input argument
  * @arginv: arguments inventory
  *
  * Return: 0 on success
  */
-int shell_help(arg_inventory_t *arginv)
+int she_ll_helper(arg_in_ven_tory_t *arginv)
 {
 	char **commands;
 	int i = 0, retval = 127;
 	bins_t bins[] = {
-		{"exit", help_exit}, {"env", help_env},
-		{"setenv", help_setenv}, {"unsetenv", help_unsetenv},
+		{"exit", help_exit}, {"env", help_env_ment},
+		{"setenv", help_set_env_ment}, {"unsetenv", help_unsetenv},
 		{"history", help_history}, {"cd", help_cd}, {"alias", help_alias},
 		{"help", help_help},
 		{NULL, NULL}
@@ -88,13 +88,13 @@ int shell_help(arg_inventory_t *arginv)
 	commands = (char **)arginv->commands;
 	if (commands[2] != NULL)
 	{
-		_perror("help: too many input commands.\n");
+		_process_err("help: too many input commands.\n");
 		return (retval);
 	}
 
 	while (bins[i].function != NULL)
 	{
-		if (_strcmp(bins[i].function, commands[1]) == 0)
+		if (_strg_com_pare(bins[i].function, commands[1]) == 0)
 		{
 			bins[i].help();
 			retval = EX_IT_SUC_CESS;
@@ -107,12 +107,12 @@ int shell_help(arg_inventory_t *arginv)
 }
 
 /**
- * shell_exit - exit status to exit
+ * she_ll_close - exit status to exit
  * @arginv: arguments inventory
  *
  * Return: 0 on success
  */
-int shell_exit(arg_inventory_t *arginv)
+int she_ll_close(arg_in_ven_tory_t *arginv)
 {
 	char **commands;
 	int es;
@@ -120,14 +120,14 @@ int shell_exit(arg_inventory_t *arginv)
 	commands = (char **)arginv->commands;
 	if (commands[1] == NULL)
 		arginv->exit = 1;
-	else if (is_uint(commands[1]))
+	else if (is_unsgn_int(commands[1]))
 	{
-		es = _atoi(commands[1]);
+		es = _a_to_oi(commands[1]);
 		arginv->exit = 1;
 		arginv->exit_status = es;
 	}
 	else
-		_perror("exit: Illegal number\n");
+		_process_err("exit: Illegal number\n");
 
 	return (EX_IT_SUC_CESS);
 }

@@ -1,36 +1,36 @@
 #include "shell.h"
 
 /**
- * _env - writes env to stdout
+ * _env_ment - writes env to stdout
  * @arginv: arguments inventory
  *
  * Return: 0 on success
  */
-int _env(arg_inventory_t *arginv)
+int _env_ment(arg_in_ven_tory_t *arginv)
 {
-	env_t *envlist = arginv->envlist;
+	env_ment *env_list = arginv->env_list;
 	char **commands;
 
 	commands = (char **)arginv->commands;
 
 	if (commands[1] != NULL)
 	{
-		_perror("env: No such file or directory\n");
+		_process_err("env: No such file or directory\n");
 		return (-1);
 	}
 
-	print_list(envlist);
+	print_list(env_list);
 
 	return (EX_IT_SUC_CESS);
 }
 
 /**
- * _history - writes history to stdout
+ * _past_time - writes history to stdout
  * @arginv: arguments inventory
  *
  * Return: 0 on success
  */
-int _history(arg_inventory_t *arginv)
+int _past_time(arg_in_ven_tory_t *arginv)
 {
 	history_t *historylist = arginv->history;
 
@@ -40,67 +40,67 @@ int _history(arg_inventory_t *arginv)
 }
 
 /**
- * _setenv - sets new environmental variable
+ * _set_env_ment - sets new environmental variable
  * @arginv: arguments inventory
  *
  * Return: 0 on success
  */
-int _setenv(arg_inventory_t *arginv)
+int _set_env_ment(arg_in_ven_tory_t *arginv)
 {
 	char **commands, *new_var, *new_val;
-	env_t *envlist = arginv->envlist;
+	env_ment *env_list = arginv->env_list;
 
 	commands = (char **)arginv->commands;
 
 	if (commands[1] == NULL || commands[2] == NULL)
 	{
-		_perror("setenv: missing parameters.\n");
+		_process_err("setenv: missing parameters.\n");
 		return (-1);
 	}
 
 	if (commands[3] != NULL)
 	{
-		_perror("setenv: missing value.\n");
+		_process_err("setenv: missing value.\n");
 		return (-1);
 	}
 
 	new_var = commands[1];
 	new_val = commands[2];
 
-	if (modify_node_env(&envlist, new_var, new_val) == EXT_FAILURE)
+	if (put_node_env_ment_ment(&env_list, new_var, new_val) == EXT_FAILURE)
 	{
-		add_node_env(&envlist, new_var, new_val);
+		add_node_env_ment_ment(&env_list, new_var, new_val);
 	}
 
 	return (EX_IT_SUC_CESS);
 }
 
 /**
- * _unsetenv - sets new environmental variable
+ * _un_set_env - sets new environmental variable
  * @arginv: arguments inventory
  *
  * Return: 0 on success
  */
-int _unsetenv(arg_inventory_t *arginv)
+int _un_set_env(arg_in_ven_tory_t *arginv)
 {
 	char **commands;
-	env_t *envlist = arginv->envlist;
+	env_ment *env_list = arginv->env_list;
 
 	commands = (char **)arginv->commands;
 
 	if (commands[1] == NULL)
 	{
-		_perror("unsetenv: missing parameters.\n");
+		_process_err("unsetenv: missing parameters.\n");
 		return (-1);
 	}
 
 	if (commands[2] != NULL)
 	{
-		_perror("unsetenv: too many input commands.\n");
+		_process_err("unsetenv: too many input commands.\n");
 		return (-1);
 	}
 
-	if (remove_node_env(&envlist, commands[1]))
+	if (del_node_env_ment_ment(&env_list, commands[1]))
 		return (EXT_FAILURE);
 
 	return (EX_IT_SUC_CESS);

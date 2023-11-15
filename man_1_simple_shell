@@ -59,9 +59,9 @@ and was designed to be compiled with the following command:
 .B $ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 .P
 .RE
-if simple_shell is executed, it will initialize in what is considered 'interactive \
+if simple_shell is exe_cuted, it will initialize in what is considered 'interactive \
 mode.'  In this scenario, the user is prompted for a command and then the \
-command is executed after the newline or 'enter' is input.  simple_shell can also \
+command is exe_cuted after the newline or 'enter' is input.  simple_shell can also \
 function in non-interactive mode by using shell scripts, such as a '|' before
 the simple_shell executable file ('hsh').  This is an example:
 .P

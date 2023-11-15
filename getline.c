@@ -1,23 +1,23 @@
 #include "shell.h"
 
 /**
- * _getline - custom getline currently reads 1 char at a time
+ * _get_line - custom getline currently reads 1 char at a time
  * @buffer: address of pointer to input commands buffer
  * @limit: maxsize of input character string, realloc if necessary
  *
  * Return: number of characters written
  */
-ssize_t _getline(char **buffer, size_t *limit)
+ssize_t _get_line(char **buffer, size_t *limit)
 {
 	ssize_t count;
 
-	count = _readline(STDIN_FILENO, buffer, limit);
+	count = _read_line(STDIN_FILENO, buffer, limit);
 
 	return (count);
 }
 
 /**
- * _readline - custom getline currently reads 1 char at a time from a file
+ * _read_line - custom getline currently reads 1 char at a time from a file
  * descriptor
  * @fd: file descriptor of the file to use for reading
  * @buffer: address of pointer to input commands buffer
@@ -25,7 +25,7 @@ ssize_t _getline(char **buffer, size_t *limit)
  *
  * Return: number of characters written
  */
-ssize_t _readline(int fd, char **buffer, size_t *limit)
+ssize_t _read_line(int fd, char **buffer, size_t *limit)
 {
 	unsigned int i, j;
 	size_t charcount, iterations;
@@ -58,12 +58,12 @@ ssize_t _readline(int fd, char **buffer, size_t *limit)
 }
 
 /**
- * _filemode - finds file mode of standard input
+ * _file_mode - finds file mode of standard input
  * @fd: STDIN_FILENO
  *
  * Return: 1 a device like a terminal, 0 a FIFO special file, or a pipe
  */
-int _filemode(int fd)
+int _file_mode(int fd)
 {
 	int result = -1;
 	struct stat buf;

@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * save_alias - saves alias definitions to  file
+ * perm_ali_as - saves alias definitions to  file
  * @arginv: arguments inventory
  *
  * Return: 0 success, 1 failure
  */
-int save_alias(arg_inventory_t *arginv)
+int perm_ali_as(arg_in_ven_tory_t *arginv)
 {
 	alias_t *tmp = arginv->alias;
 	char *file, *buffer;
@@ -19,12 +19,12 @@ int save_alias(arg_inventory_t *arginv)
 
 	while (tmp)
 	{
-		buffer = (char *)safe_malloc(_strlen(tmp->alias) + _strlen(tmp->command)
+		buffer = (char *)safe_malloc(_str_length(tmp->alias) + _str_length(tmp->command)
 									 + 4);
-		_strcpy(buffer, tmp->alias);
-		_strcat(buffer, ":");
-		_strcat(buffer, tmp->command);
-		_strcat(buffer, "\n");
+		_str_co_py(buffer, tmp->alias);
+		_str_categ(buffer, ":");
+		_str_categ(buffer, tmp->command);
+		_str_categ(buffer, "\n");
 		append_text_to_file(file, buffer);
 		tmp = tmp->next;
 		free(buffer);
@@ -34,12 +34,12 @@ int save_alias(arg_inventory_t *arginv)
 }
 
 /**
- * load_alias - loads alias definitions from file
+ * up_load_al_ias - loads alias definitions from file
  * @arginv: arguments inventory
  *
  * Return: 0 success, 1 failure
  */
-int load_alias(arg_inventory_t *arginv)
+int up_load_al_ias(arg_in_ven_tory_t *arginv)
 {
 	ssize_t count;
 	size_t sz = BU_FFER_SIZE;
@@ -55,7 +55,7 @@ int load_alias(arg_inventory_t *arginv)
 		return (1);
 	}
 	buffer = (char *)safe_malloc(sz);
-	while ((count = _readline(fd, &buffer, &sz)) != 0)
+	while ((count = _read_line(fd, &buffer, &sz)) != 0)
 	{
 		while (buffer[count - 1] == '\n')
 			buffer[count - 1] = '\0';
@@ -87,7 +87,7 @@ alias_t *fetch_node_alias(alias_t *head, char *var)
 
 	while (tmp != NULL)
 	{
-		if (_strcmp(tmp->alias, var) == 0)
+		if (_strg_com_pare(tmp->alias, var) == 0)
 			return (tmp);
 
 		tmp = tmp->next;

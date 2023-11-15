@@ -9,9 +9,9 @@
 int parse_error(token_t *near)
 {
 	if (near)
-		_perror("Parse error near\n");
+		_process_err("Parse error near\n");
 	else
-		_perror("Parse error\n");
+		_process_err("Parse error\n");
 
 	return (1);
 }
@@ -41,7 +41,7 @@ ptree_t *parse_expr(unsigned int *ntoken, tokens_t *tokens, ptree_t *lhs,
 		if (rhs == NULL)
 		{
 			if (*ntoken < tokens->tokensN || tokens->tokens[op].id !=
-				TOKEN_BACKGROUND)
+				TO_KEN_BACK_GROUND)
 			{
 				parse_error(&tokens->tokens[*ntoken]);
 				return (NULL);
@@ -71,7 +71,7 @@ ptree_t *parse_expr(unsigned int *ntoken, tokens_t *tokens, ptree_t *lhs,
 }
 
 /**
- * parse - main funciton that creates the entire parse tree from the tokenizer
+ * parse - main funciton that creates the entire parse tree from the gen_tokenr
  * @parser: parser_t struct
  * @tokens: tokens_t struct
  *

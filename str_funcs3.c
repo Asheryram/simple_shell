@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * replace_str - replace part of string by another
+ * repl_str_all - replace part of string by another
  *
  * @old_str: string that will be modified
  * @new_str: string to be used as replacement
@@ -10,11 +10,11 @@
  * @flg: indicates if new_str should be freed
  *
  */
-void replace_str(char **old_str, char *new_str, int i, int j, int flg)
+void repl_str_all(char **old_str, char *new_str, int i, int j, int flg)
 {
 	char *tmp;
 
-	tmp = _str_replace(*old_str, i, j, new_str);
+	tmp = _str_repl(*old_str, i, j, new_str);
 	free(*old_str);
 	*old_str = tmp;
 	if (flg)
@@ -23,12 +23,12 @@ void replace_str(char **old_str, char *new_str, int i, int j, int flg)
 }
 
 /**
- * separate_string - separates string at first '='
+ * se_pa_rate_string - separates string at first '='
  * @string: one string from environ or alias input
  *
  * Return: array of 2 strings
  */
-char **separate_string(char *string)
+char **se_pa_rate_string(char *string)
 {
 	char **result, *left, *right;
 	int i, j, lenleft = 0, lenright = 0;
@@ -56,11 +56,11 @@ char **separate_string(char *string)
 }
 
 /**
- * int_to_str - convert an integer to a string
+ * int_t_to_str_t - convert an integer to a string
  * @n: unsigned integer to print
  * Return: string with converted integer
  */
-char *int_to_str(unsigned int n)
+char *int_t_to_str_t(unsigned int n)
 {
 	unsigned int copy, size;
 	int nth, chars_written;
@@ -107,19 +107,19 @@ char *int_to_str(unsigned int n)
  *
  * Return: replaced string
  */
-char *_str_replace(char *string, unsigned int start, unsigned int end,
+char *_str_repl(char *string, unsigned int start, unsigned int end,
 				   char *rep)
 {
 	char *new_str;
 
-	new_str = safe_malloc(_strlen(string) + _strlen(rep) + 1);
+	new_str = safe_malloc(_str_length(string) + _str_length(rep) + 1);
 
-	_strncpy(new_str, string, start);
+	_strng_co_py(new_str, string, start);
 
-	_strcat(new_str, rep);
+	_str_categ(new_str, rep);
 
-	if (end < _strlen(string) - 1)
-		_strcat(new_str, &string[end + 1]);
+	if (end < _str_length(string) - 1)
+		_str_categ(new_str, &string[end + 1]);
 
 	return (new_str);
 }

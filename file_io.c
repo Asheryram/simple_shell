@@ -26,7 +26,7 @@ ssize_t read_textfile(char *filename, size_t letters)
 		return (0);
 	}
 
-	letters2 = _strlen(buffer);
+	letters2 = _str_length(buffer);
 	letters2 = write(STDOUT_FILENO, buffer, letters2);
 	if (letters2 == -1)
 	{
@@ -58,7 +58,7 @@ int trunc_text_to_file(char *filename, char *text_content)
 	if (text_content == NULL)
 		return (close(fd) == -1 ? -1 : 1);
 
-	len = _strlen(text_content);
+	len = _str_length(text_content);
 
 	if (write(fd, text_content, len) == -1)
 	{
@@ -88,7 +88,7 @@ int append_text_to_file(char *filename, char *text_content)
 	if (text_content == NULL)
 		return (close(fd) == -1 ? -1 : 1);
 
-	len = _strlen(text_content);
+	len = _str_length(text_content);
 
 	if (write(fd, text_content, len) == -1)
 	{

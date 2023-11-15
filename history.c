@@ -6,7 +6,7 @@
  *
  * Return: head (pointer to first node of linked list of environ variables)
  */
-history_t *history_list(arg_inventory_t *arginv)
+history_t *history_list(arg_in_ven_tory_t *arginv)
 {
 	history_t *head;
 	char *file, *buffer;
@@ -94,7 +94,7 @@ history_t *add_node_history(history_t **head, char *command)
 	new_node = malloc(sizeof(history_t));
 	if (new_node == NULL)
 		return (NULL);
-	new_node->command = _strdup(command);
+	new_node->command = _str_dupp(command);
 	new_node->next = NULL;
 	new_node->number = 0;
 	if (!*head)
@@ -127,7 +127,7 @@ history_t *add_node_history(history_t **head, char *command)
  *
  * Return: 0 success, 1 failure
  */
-int file_history(arg_inventory_t *arginv)
+int file_history(arg_in_ven_tory_t *arginv)
 {
 	char *history_text;
 
@@ -153,7 +153,7 @@ char *history_to_string(history_t *head)
 
 	while (temp)
 	{
-		size += _strlen(temp->command);
+		size += _str_length(temp->command);
 		temp = temp->next;
 	}
 
@@ -162,7 +162,7 @@ char *history_to_string(history_t *head)
 	temp = head;
 	while (temp)
 	{
-		_strncat(string, temp->command, _strlen(temp->command));
+		_strn_cat(string, temp->command, _str_length(temp->command));
 		temp = temp->next;
 	}
 

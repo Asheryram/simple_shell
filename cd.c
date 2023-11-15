@@ -3,35 +3,35 @@
 /**
  * file_path - assembles path to cd into
  * @commands: array of pointer pointg to commands
- * @envlist: head of env linked list
+ * @env_list: head of env linked list
  *
  * Return: full filepath
  */
-char *file_path(char **commands, env_t *envlist)
+char *file_path(char **commands, env_ment *env_list)
 {
-	env_t *fetched_home, *fetched_old;
+	env_ment *fetched_home, *fetched_old;
 	int hyphen;
 	char *path;
 
 	path = safe_malloc(1024);
 
-	fetched_home = fetch_node(envlist, "HOME");
-	fetched_old = fetch_node(envlist, "OLDPWD");
+	fetched_home = fetch_node(env_list, "HOME");
+	fetched_old = fetch_node(env_list, "OLDPWD");
 
 	if (commands[1] != NULL)
-		hyphen = _strncmp(commands[1], "-", 1);
+		hyphen = _strng_com_pare(commands[1], "-", 1);
 
 	if (commands[1] == NULL)
-		path = _strcpy(path, fetched_home->val);
+		path = _str_co_py(path, fetched_home->val);
 	else if (hyphen == 0)
-		path = _strcpy(path, fetched_old->val);
+		path = _str_co_py(path, fetched_old->val);
 	else if (commands[1][0] == '/')
-		path = _strcpy(path, commands[1]);
+		path = _str_co_py(path, commands[1]);
 	else
 	{
 		getcwd(path, 1024);
-		_strncat(path, "/", 1);
-		_strncat(path, commands[1], _strlen(commands[1]));
+		_strn_cat(path, "/", 1);
+		_strn_cat(path, commands[1], _str_length(commands[1]));
 	}
 
 	return (path);
@@ -39,12 +39,12 @@ char *file_path(char **commands, env_t *envlist)
 
 
 /**
- * _cd - builtin cd function
+ * _cee_dee - builtin cd function
  * @arginv: arg inventory
  *
  * Return: 0 if good, -1 if bad
  */
-int _cd(arg_inventory_t *arginv)
+int _cee_dee(arg_in_ven_tory_t *arginv)
 {
 	char *path, *oldpwd, *pwd, **commands;
 	int check;
@@ -56,7 +56,7 @@ int _cd(arg_inventory_t *arginv)
 
 	commands = (char **)arginv->commands;
 
-	path = file_path(commands, arginv->envlist);
+	path = file_path(commands, arginv->env_list);
 
 	check = chdir(path);
 
@@ -70,8 +70,8 @@ int _cd(arg_inventory_t *arginv)
 	else
 	{
 		getcwd(pwd, 1024);
-		modify_node_env(&arginv->envlist, "PWD", pwd);
-		modify_node_env(&arginv->envlist, "OLDPWD", oldpwd);
+		put_node_env_ment_ment(&arginv->env_list, "PWD", pwd);
+		put_node_env_ment_ment(&arginv->env_list, "OLDPWD", oldpwd);
 	}
 	free(oldpwd);
 	free(pwd);

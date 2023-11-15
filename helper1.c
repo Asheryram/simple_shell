@@ -20,9 +20,9 @@ void help_cd(void)
 }
 
 /**
- * help_env - help function to explain how the associated function works
+ * help_env_ment - help function to explain how the associated function works
  */
-void help_env(void)
+void help_env_ment(void)
 {
 	_puts("\nUsage: $ env");
 	_puts("\tDisplay all environmental variables, in the form:");

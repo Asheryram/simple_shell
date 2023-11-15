@@ -31,8 +31,8 @@ alias_t *add_node_alias(alias_t **head, char *alias, char *command)
 	if (new_node == NULL)
 		return (NULL);
 
-	new_node->alias = _strdup(alias);
-	new_node->command = _strdup(command);
+	new_node->alias = _str_dupp(alias);
+	new_node->command = _str_dupp(command);
 	new_node->next = NULL;
 
 	if (!*head)
@@ -66,10 +66,10 @@ int modify_node_alias(alias_t **head, char *new_var, char *new_val)
 
 	while (temp)
 	{
-		if (_strcmp(temp->alias, new_var) == 0)
+		if (_strg_com_pare(temp->alias, new_var) == 0)
 		{
 			free(temp->command);
-			temp->command = _strdup(new_val);
+			temp->command = _str_dupp(new_val);
 
 			return (EX_IT_SUC_CESS);
 		}
@@ -96,7 +96,7 @@ int remove_node_alias(alias_t **head, char *var)
 	copy_head = NULL;
 	while (temp)
 	{
-		if (_strcmp(temp->alias, var) == 0)
+		if (_strg_com_pare(temp->alias, var) == 0)
 		{
 			if (copy_head)
 				copy_head->next = temp->next;
@@ -130,9 +130,9 @@ int write_alias(alias_t *head)
 
 	while (temp)
 	{
-		write(STDOUT_FILENO, temp->alias, _strlen(temp->alias));
+		write(STDOUT_FILENO, temp->alias, _str_length(temp->alias));
 	    write(STDOUT_FILENO, "=\"", 2);
-		write(STDOUT_FILENO, temp->command, _strlen(temp->command));
+		write(STDOUT_FILENO, temp->command, _str_length(temp->command));
 	    write(STDOUT_FILENO, "\"\n", 2);
 
 		temp = temp->next;

@@ -19,46 +19,46 @@ int _getpid(void)
  * @arginv: arg inventory
  * @index: index of token_t struct array
  */
-void bash_replace(arg_inventory_t *arginv, int index)
+void bash_replace(arg_in_ven_tory_t *arginv, int index)
 {
 	unsigned int j;
-	env_t *node;
+	env_ment *node;
 	tokens_t t = arginv->tokens;
 
-	for (j = 0; j < _strlen(t.tokens[index].str); j++)
+	for (j = 0; j < _str_length(t.tokens[index].str); j++)
 		if (t.tokens[index].str[j] == '$' && t.tokens[index].str[j + 1] != '\0')
 			switch (t.tokens[index].str[j + 1])
 			{
 				case '$':
-					replace_str((char **)&t.tokens[index].str,
-						int_to_str(_getpid()), j, j + 1, 1);
+					repl_str_all((char **)&t.tokens[index].str,
+						int_t_to_str_t(_getpid()), j, j + 1, 1);
 					break;
 				case '?':
-					replace_str((char **)&t.tokens[index].str,
-						int_to_str(arginv->exit_status), j,
+					repl_str_all((char **)&t.tokens[index].str,
+						int_t_to_str_t(arginv->exit_status), j,
 						j + 1, 1);
 					break;
 				case '!':
-						replace_str((char **)&t.tokens[index].str,
+						repl_str_all((char **)&t.tokens[index].str,
 						(arginv->last_bg_pid == -1) ? "" :
-						int_to_str(arginv->last_bg_pid), j,
+						int_t_to_str_t(arginv->last_bg_pid), j,
 						j + 1, 1);
 					break;
 				case '0':
-					replace_str((char **)&t.tokens[index].str, "hsh", j,
+					repl_str_all((char **)&t.tokens[index].str, "hsh", j,
 						j + 1, 0);
 						break;
 				default:
-					node = fetch_node(arginv->envlist,
+					node = fetch_node(arginv->env_list,
 							(char *)&t.tokens[index].str[j + 1]);
-					replace_str((char **)&t.tokens[index].str,
+					repl_str_all((char **)&t.tokens[index].str,
 							(node == NULL) ? "" : node->val, j,
-							_strlen(t.tokens[index].str) - 1, 0);
+							_str_length(t.tokens[index].str) - 1, 0);
 					}
 				else if (t.tokens[index].str[j] == '~' && j == 0)
 				{
-					node = fetch_node(arginv->envlist, "HOME");
-					replace_str((char **)&t.tokens[index].str, node->val, j, j, 0);
+					node = fetch_node(arginv->env_list, "HOME");
+					repl_str_all((char **)&t.tokens[index].str, node->val, j, j, 0);
 				}
 }
 
@@ -68,7 +68,7 @@ void bash_replace(arg_inventory_t *arginv, int index)
  * @arginv: args inventory
  *
  */
-void expand_bash_vars(arg_inventory_t *arginv)
+void expand_bash_vars(arg_in_ven_tory_t *arginv)
 {
 	unsigned int i;
 	tokens_t t = arginv->tokens;
@@ -84,7 +84,7 @@ void expand_bash_vars(arg_inventory_t *arginv)
  * @arginv: args inventory
  * Return: int
  */
-int expand_alias(arg_inventory_t *arginv)
+int expand_alias(arg_in_ven_tory_t *arginv)
 {
 	alias_t *node;
 	tokens_t cmd_tokens;
@@ -96,7 +96,7 @@ int expand_alias(arg_inventory_t *arginv)
 
 	if (node != NULL)
 	{
-		tokenize(&cmd_tokens, node->command);
+		gen_token(&cmd_tokens, node->command);
 		count = 0;
 		while (arginv->commands[count] != NULL)
 		{
@@ -110,13 +110,13 @@ int expand_alias(arg_inventory_t *arginv)
 		}
 
 		for (i = 0; i < cmd_tokens.tokensN; i++)
-			commands[i] = _strdup((char *)cmd_tokens.tokens[i].str);
+			commands[i] = _str_dupp((char *)cmd_tokens.tokens[i].str);
 		free(arginv->commands[0]);
 		free(arginv->commands);
 		commands[count + cmd_tokens.tokensN - 1] = NULL;
 		count = cmd_tokens.tokensN;
 		arginv->commands = commands;
-		delete_tokens(&cmd_tokens);
+		del_tokens(&cmd_tokens);
 		return (count - 1);
 	}
 	return (0);

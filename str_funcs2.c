@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * _strcpy - copies a string from src to dest
+ * _str_co_py - copies a string from src to dest
  * @dest: new copy of string
  * @src: the source of the copy
  *
  * Return: pointer to copy
  */
-char *_strcpy(char *dest, char *src)
+char *_str_co_py(char *dest, char *src)
 {
 	int c;
 
@@ -20,14 +20,14 @@ char *_strcpy(char *dest, char *src)
 }
 
 /**
- * _strncpy - copies string from source to destination
+ * _strng_co_py - copies string from source to destination
  * @dest: destination string
  * @src: source string to be copied
  * @n: bytes to be copied from source string
  *
  * Return: destination string concatenated
  */
-char *_strncpy(char *dest, char *src, int n)
+char *_strng_co_py(char *dest, char *src, int n)
 {
 	int j;
 
@@ -44,13 +44,13 @@ char *_strncpy(char *dest, char *src, int n)
 }
 
 /**
- * _strcat - concatenates from src string to dest string
+ * _str_categ - concatenates from src string to dest string
  * @dest: destination string
  * @src: source string
  *
  * Return: pointer to destination
  */
-char *_strcat(char *dest, char *src)
+char *_str_categ(char *dest, char *src)
 {
 	while (*dest)
 		dest++;

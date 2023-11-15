@@ -10,9 +10,9 @@ void help_history(void)
 }
 
 /**
- * help_setenv - help function to explain how the associated function works
+ * help_set_env_ment - help function to explain how the associated function works
  */
-void help_setenv(void)
+void help_set_env_ment(void)
 {
 	_puts("\nUsage: $ setenv [NAME] [VALUE]");
 	_puts("\tSets a new environmental variable");

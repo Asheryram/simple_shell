@@ -59,7 +59,7 @@ ptree_t *ptree_new_string_node(ptree_t *parent, tokens_t *tokens,
 
 	/* initialize stringsssssssss */
 	for (i = 0; i < node->stringsN; i++)
-		node->strings[i] = _strdup(tokens->tokens[i + start].str);
+		node->strings[i] = _str_dupp(tokens->tokens[i + start].str);
 
 	node->strings[i] = NULL;
 
