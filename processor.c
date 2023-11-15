@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * process_exe_cute_core - this is the core execution function
+ * process_exe_cute_core - this is the cor e execution function
  * @arginv: arg inventory
  *
  * Return: 0
