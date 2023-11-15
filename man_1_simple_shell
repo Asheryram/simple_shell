@@ -137,11 +137,16 @@ This secion has information on the included builtin commands with simple_shell
 
 
 
+
+
+
+
+
 .SH BUGS
 
 none known.  simple_shell does not currently replicate these tasks:
 
 .SH AUTHOR
 
-Olumide Micheal Tolulope <olumidemicheal7@gmail.com>
-Ahmed Gbadamosi <amurtala@gmail.com>
+Yram Asher Tetteh-Abotsi <ashertettehabotsi@gmail.com>
+Cleeric Senyo Dey <cleericdey15@gmail.com>

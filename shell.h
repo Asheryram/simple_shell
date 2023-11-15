@@ -35,7 +35,7 @@
 /* ---------------------MACROS---------------- */
 #define BU_FFER_SIZE 1024
 #define EX_IT_SUC_CESS 0
-#define EX_IT_FAI_LURE1
+#define EX_IT_FAI_LURE 1
 #define TRUE_THY (1 == 1)
 #define FALSE_THY (!TRUE_THY)
 

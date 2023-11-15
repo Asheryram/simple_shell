@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * sig_handler - handles user input of ^C with the following
  * @sig: integer value of signal to change, will be SIGINT = ^C
@@ -31,11 +30,6 @@ int main(void)
 		{
 			write(STDOUT_FILENO, "$ ", 2);
 		}
-		if (!_get_line(&arginv->input_commands, &arginv->buflimit))
-			break;
-		add_node_history(&arginv->history, arginv->input_commands);
-
-		gen_token(&arginv->tokens, arginv->input_commands);
 
 		if (arginv->tokens.tokensN > 0)
 		{
@@ -51,6 +45,12 @@ int main(void)
 			process_exe_cute(arginv);
 			delete_parser(&arginv->parser);
 		}
+
+		if (!_get_line(&arginv->input_commands, &arginv->buflimit))
+			break;
+		add_node_history(&arginv->history, arginv->input_commands);
+
+		gen_token(&arginv->tokens, arginv->input_commands);
 
 		mem_reset(arginv->input_commands, BU_FFER_SIZE);
 
