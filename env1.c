@@ -1,52 +1,5 @@
 #include "shell.h"
 
-/**
- * link_counts - counts number of nodes in linked list
- * @head: pointer to head of linked list
- *
- * Return: number of nodes
- */
-unsigned int link_counts(env_ment *head)
-{
-	env_ment *tmp;
-	unsigned int count;
-
-	tmp = head;
-	count = 0;
-
-	while (tmp != NULL)
-	{
-		tmp = tmp->next;
-		count++;
-	}
-
-	return (count);
-}
-
-/**
- * env_list - creates a linked list of all environ variables
- *
- * Return: head (pointer to first node of linked list of environ variables)
- */
-env_ment *env_list(void)
-{
-	int i;
-	env_ment *head;
-	char **variable;
-
-	head = NULL;
-	for (i = 0; environ[i] != NULL; i++)
-	{
-		variable = se_pa_rate_string(environ[i]);
-		if (add_node_env_ment_ment(&head, variable[0], variable[1]) == NULL)
-			return (NULL);
-		free(variable[0]);
-		free(variable[1]);
-		free(variable);
-	}
-
-	return (head);
-}
 
 /**
  * link_to_poin_ter - converts linked list to double pointer
@@ -86,4 +39,55 @@ char **link_to_poin_ter(env_ment *head)
 	dpointer[i] = NULL;
 
 	return (dpointer);
+}
+
+
+
+
+/**
+ * env_list - creates a linked list of all environ variables
+ *
+ * Return: head (pointer to first node of linked list of environ variables)
+ */
+env_ment *env_list(void)
+{
+	int i;
+	env_ment *head;
+	char **variable;
+
+	head = NULL;
+	for (i = 0; environ[i] != NULL; i++)
+	{
+		variable = se_pa_rate_string(environ[i]);
+		if (add_node_env_ment_ment(&head, variable[0], variable[1]) == NULL)
+			return (NULL);
+		free(variable[0]);
+		free(variable[1]);
+		free(variable);
+	}
+
+	return (head);
+}
+
+/**
+ * link_counts - counts number of nodes in linked list
+ * @head: pointer to head of linked list
+ *
+ * Return: number of nodes
+ */
+unsigned int link_counts(env_ment *head)
+{
+	env_ment *tmp;
+	unsigned int count;
+
+	tmp = head;
+	count = 0;
+
+	while (tmp != NULL)
+	{
+		tmp = tmp->next;
+		count++;
+	}
+
+	return (count);
 }

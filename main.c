@@ -37,8 +37,8 @@ int main(void)
 
 			if (parse(&arginv->parser, &arginv->tokens))
 			{
-				delete_parser(&arginv->parser);
 				del_tokens(&arginv->tokens);
+				delete_parser(&arginv->parser);
 				continue;
 			}
 

@@ -1,5 +1,44 @@
 #include "shell.h"
 
+
+/**
+ * mem_reset - sets all bytes of string to '\0'
+ * @str: string
+ * @bytes: number of bytes
+ *
+ * Return: pointer to string with reset mem
+ */
+char *mem_reset(char *str, int bytes)
+{
+	int i = 0;
+
+	while (i < bytes)
+		str[i++] = '\0';
+
+	return (str);
+}
+
+/**
+ * safe_malloc - mallocs memory of size bytes, prints error message on error
+ * @bytes: number of bytes to malloc
+ *
+ * Return: pointer to malloced memory or NULL
+ */
+void *safe_malloc(int bytes)
+{
+	void *check;
+
+	check = malloc(bytes);
+	if (check == NULL)
+	{
+		_process_err("No Memory\n");
+		exit(1);
+	}
+	check = mem_reset(check, bytes);
+
+	return (check);
+}
+
 /**
  * _realloc - reallocates a memory block using malloc and free
  * @ptr: pointer to reallocate memory
@@ -38,42 +77,4 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	free(ptr);
 
 	return (p);
-}
-
-/**
- * mem_reset - sets all bytes of string to '\0'
- * @str: string
- * @bytes: number of bytes
- *
- * Return: pointer to string with reset mem
- */
-char *mem_reset(char *str, int bytes)
-{
-	int i = 0;
-
-	while (i < bytes)
-		str[i++] = '\0';
-
-	return (str);
-}
-
-/**
- * safe_malloc - mallocs memory of size bytes, prints error message on error
- * @bytes: number of bytes to malloc
- *
- * Return: pointer to malloced memory or NULL
- */
-void *safe_malloc(int bytes)
-{
-	void *check;
-
-	check = malloc(bytes);
-	if (check == NULL)
-	{
-		_process_err("No Memory\n");
-		exit(1);
-	}
-	check = mem_reset(check, bytes);
-
-	return (check);
 }

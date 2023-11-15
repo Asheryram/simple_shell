@@ -1,25 +1,30 @@
 #include "shell.h"
 
-/**
- * repl_str_all - replace part of string by another
- *
- * @old_str: string that will be modified
- * @new_str: string to be used as replacement
- * @i: starting position to replace in old_str
- * @j: ending position to replace in old_str
- * @flg: indicates if new_str should be freed
- *
- */
-void repl_str_all(char **old_str, char *new_str, int i, int j, int flg)
-{
-	char *tmp;
 
-	tmp = _str_repl(*old_str, i, j, new_str);
-	free(*old_str);
-	*old_str = tmp;
-	if (flg)
-		if (new_str[0])
-			free(new_str);
+/**
+ * str_replace - replaces part of a string for another
+ * @string: string to replace
+ * @start: where to start
+ * @end: where to end
+ * @rep: string to replace with
+ *
+ * Return: replaced string
+ */
+char *_str_repl(char *string, unsigned int start, unsigned int end,
+				   char *rep)
+{
+	char *new_str;
+
+	new_str = safe_malloc(_str_length(string) + _str_length(rep) + 1);
+
+	_strng_co_py(new_str, string, start);
+
+	_str_categ(new_str, rep);
+
+	if (end < _str_length(string) - 1)
+		_str_categ(new_str, &string[end + 1]);
+
+	return (new_str);
 }
 
 /**
@@ -53,6 +58,28 @@ char **se_pa_rate_string(char *string)
 	result[0] = left, result[1] = right;
 
 	return (result);
+}
+
+/**
+ * repl_str_all - replace part of string by another
+ *
+ * @old_str: string that will be modified
+ * @new_str: string to be used as replacement
+ * @i: starting position to replace in old_str
+ * @j: ending position to replace in old_str
+ * @flg: indicates if new_str should be freed
+ *
+ */
+void repl_str_all(char **old_str, char *new_str, int i, int j, int flg)
+{
+	char *tmp;
+
+	tmp = _str_repl(*old_str, i, j, new_str);
+	free(*old_str);
+	*old_str = tmp;
+	if (flg)
+		if (new_str[0])
+			free(new_str);
 }
 
 /**
@@ -98,28 +125,3 @@ char *int_t_to_str_t(unsigned int n)
 	return (str);
 }
 
-/**
- * str_replace - replaces part of a string for another
- * @string: string to replace
- * @start: where to start
- * @end: where to end
- * @rep: string to replace with
- *
- * Return: replaced string
- */
-char *_str_repl(char *string, unsigned int start, unsigned int end,
-				   char *rep)
-{
-	char *new_str;
-
-	new_str = safe_malloc(_str_length(string) + _str_length(rep) + 1);
-
-	_strng_co_py(new_str, string, start);
-
-	_str_categ(new_str, rep);
-
-	if (end < _str_length(string) - 1)
-		_str_categ(new_str, &string[end + 1]);
-
-	return (new_str);
-}

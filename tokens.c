@@ -1,17 +1,5 @@
 #include "shell.h"
 
-/**
- * init_to_kens - initializes token struct
- * @tokens: tokens struct to initialize
- * @length: length to malloc for
- */
-void init_to_kens(tokens_t *tokens, int length)
-{
-  tokens->tokens = safe_malloc(length * sizeof(token_t));
-
-  /* Initialize the rest of the structure */
-  tokens->tokensN = 0;
-}
 
 /**
  * re_di_rec_tion - checks if token id is a redirection
@@ -22,7 +10,7 @@ void init_to_kens(tokens_t *tokens, int length)
 int re_di_rec_tion(int token_id)
 {
   return (token_id == TO_KEN_RE_WRITE || token_id == TO_KEN_AP_PEND ||
-	  token_id == TOKEN_CAT);
+	  token_id == TO_KEN_CAT);
 }
 
 /**
@@ -84,10 +72,10 @@ void token_clasify(tokens_t *tokens)
 			       { TO_KEN_BACK_GROUND, "&",  "background", 1 },
 			       { TO_KEN_AND,        "&&", "and",        2 },
 			       { TO_KEN_OR,         "||", "or",         2 },
-			       { TOKEN_PIPE,       "|",  "pipe",       3 },
+			       { TO_KEN_PIPE ,       "|",  "pipe",       3 },
 			       { TO_KEN_RE_WRITE,    ">",  "rewrite",    4 },
-			       { TOKEN_APPEND,     ">>", "append",     4 },
-			       { TOKEN_CAT,        "<",  "cat",        4 },
+			       { TO_KEN_AP_PEND,     ">>", "append",     4 },
+			       { TO_KEN_CAT,        "<",  "cat",        4 },
 			       { 9, '\0', '\0', 9}
   };
 
@@ -105,4 +93,19 @@ void token_clasify(tokens_t *tokens)
 	    }
 	}
     }
+}
+
+
+
+/**
+ * init_to_kens - initializes token struct
+ * @tokens: tokens struct to initialize
+ * @length: length to malloc for
+ */
+void init_to_kens(tokens_t *tokens, int length)
+{
+  tokens->tokens = safe_malloc(length * sizeof(token_t));
+
+  /* Initialize the rest of the structure */
+  tokens->tokensN = 0;
 }

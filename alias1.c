@@ -58,6 +58,8 @@ alias_t *add_node_alias(alias_t **head, char *alias, char *command)
  *
  * Return: pointer to new node or NULL if fail
  */
+
+
 int modify_node_alias(alias_t **head, char *new_var, char *new_val)
 {
 	alias_t *temp;
@@ -76,7 +78,7 @@ int modify_node_alias(alias_t **head, char *new_var, char *new_val)
 		temp = temp->next;
 	}
 
-	return (EXT_FAILURE);
+	return (EX_IT_FAI_LURE);
 }
 
 
@@ -92,7 +94,7 @@ int remove_node_alias(alias_t **head, char *var)
 	alias_t *copy_head = *head, *temp = *head;
 
 	if (head == NULL)
-		return (EXT_FAILURE);
+		return (EX_IT_FAI_LURE);
 	copy_head = NULL;
 	while (temp)
 	{
@@ -113,7 +115,7 @@ int remove_node_alias(alias_t **head, char *var)
 		temp = temp->next;
 	}
 
-	return (EXT_FAILURE);
+	return (EX_IT_FAI_LURE);
 }
 
 

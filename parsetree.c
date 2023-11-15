@@ -1,23 +1,6 @@
 #include "shell.h"
 
-/**
- * ptree_new_node - addes a new node into the tree
- * @parent: pointer to the parent node
- *
- * Return: pointer to the new child node
- */
-ptree_t *ptree_new_node(ptree_t *parent)
-{
-	ptree_t *node = safe_malloc(sizeof(ptree_t));
 
-	node->left = NULL;
-	node->right = NULL;
-	node->parent = parent;
-	node->strings = NULL;
-	node->stringsN = 0;
-
-	return (node);
-}
 
 /**
  * ptree_new_string_node - inserts TO_KEN_STRING type into a tree
@@ -101,4 +84,23 @@ int delete_ptree(ptree_t *node)
 	/* delete input node (could be root node, could be some child node) */
 	free(node);
 	return (0);
+}
+
+/**
+ * ptree_new_node - addes a new node into the tree
+ * @parent: pointer to the parent node
+ *
+ * Return: pointer to the new child node
+ */
+ptree_t *ptree_new_node(ptree_t *parent)
+{
+	ptree_t *node = safe_malloc(sizeof(ptree_t));
+
+	node->left = NULL;
+	node->right = NULL;
+	node->parent = parent;
+	node->strings = NULL;
+	node->stringsN = 0;
+
+	return (node);
 }

@@ -2,6 +2,29 @@
 #define STRUCT
 
 /**
+ * struct _builtins - matches command to appropriate builtin function
+ * @command: string command for builtin
+ * @builtin_func: function to handle builtin command
+ */
+typedef struct _builtins
+{
+  char *command;
+  int (*builtin_func)(arg_in_ven_tory_t *arginv);
+} builtins_t;
+
+/**
+ * struct bins - matches command to appropriate builtin function
+ * @function: string of function name
+ * @help: string of name of file
+ */
+typedef struct bins
+{
+  char *function;
+  void (*help)(void);
+} bins_t;
+
+
+/**
  * struct token - categorizes a token
  * @id: id of token from TOKEN_ macros
  * @str: token
@@ -13,6 +36,28 @@ typedef struct token
   char *str;
   int prec;
 } token_t;
+
+
+/**
+ * struct ptree - base parse tree struct
+ * @left: left child node
+ * @right: right child node
+ * @parent: parent node
+ * @token_id: id from macros
+ * @strings: corresponding strings, NULL if not TO_KEN_STRING
+ * @stringsN: amount of strings in strings +1 (for NULL), 0 if not TO_KEN_STRING
+ */
+typedef struct ptree
+{
+  struct ptree *left;
+  struct ptree *right;
+  struct ptree *parent;
+
+  int token_id;
+  char **strings;
+  unsigned int stringsN;
+} ptree_t;
+
 
 /**
  * struct tokens - struct for tokenizing string
@@ -43,51 +88,6 @@ typedef struct token_id
   int precedence;
 } token_types;
 
-/**
- * struct ptree - base parse tree struct
- * @left: left child node
- * @right: right child node
- * @parent: parent node
- * @token_id: id from macros
- * @strings: corresponding strings, NULL if not TO_KEN_STRING
- * @stringsN: amount of strings in strings +1 (for NULL), 0 if not TO_KEN_STRING
- */
-typedef struct ptree
-{
-  struct ptree *left;
-  struct ptree *right;
-  struct ptree *parent;
-
-  int token_id;
-  char **strings;
-  unsigned int stringsN;
-} ptree_t;
-
-/**
- * struct parser - struct to parse
- * @tree: resulting parse tree
- */
-typedef struct parser
-{
-  ptree_t *tree;
-} parser_t;
-
-/**
- * struct process - this attributes a parse tree with TO_KEN_STRING id with a
- * process id
- * @ptree: ptree to process
- * @pid: pid
- * @io_redir: io_redir
- * @filename: filename
- */
-typedef struct process
-{
-  ptree_t *ptree;
-  pid_t pid;
-  /* 0 for no redirection, 3 for >, 4 >>, 5 < */
-  int io_redir;
-  char *filename;
-} process_t;
 
 /**
  * struct pipeline - struct containing multiple processes
@@ -194,26 +194,31 @@ typedef struct arg_inventory
   int exit_status;
 } arg_in_ven_tory_t;
 
-/**
- * struct _builtins - matches command to appropriate builtin function
- * @command: string command for builtin
- * @builtin_func: function to handle builtin command
- */
-typedef struct _builtins
-{
-  char *command;
-  int (*builtin_func)(arg_in_ven_tory_t *arginv);
-} builtins_t;
 
 /**
- * struct bins - matches command to appropriate builtin function
- * @function: string of function name
- * @help: string of name of file
+ * struct parser - struct to parse
+ * @tree: resulting parse tree
  */
-typedef struct bins
+typedef struct parser
 {
-  char *function;
-  void (*help)(void);
-} bins_t;
+  ptree_t *tree;
+} parser_t;
+
+/**
+ * struct process - this attributes a parse tree with TO_KEN_STRING id with a
+ * process id
+ * @ptree: ptree to process
+ * @pid: pid
+ * @io_redir: io_redir
+ * @filename: filename
+ */
+typedef struct process
+{
+  ptree_t *ptree;
+  pid_t pid;
+  /* 0 for no redirection, 3 for >, 4 >>, 5 < */
+  int io_redir;
+  char *filename;
+} process_t;
 
 #endif

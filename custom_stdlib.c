@@ -71,12 +71,12 @@ void _process_err(char *string)
  */
 void _chg_mem_loc(void *dest, void *src, size_t n)
 {
-	char *copy_source, *copy_dest, *temp;
+	char *copy_source, *temp ,*copy_dest;
 	size_t i;
 
 	copy_source = (char *)src;
 	copy_dest = (char *)dest;
-	temp = malloc(sizeof(char) * 1024);
+	temp = malloc(sizeof(char) * BU_FFER_SIZE);
 
 	for (i = 0; i < n; i++)
 		temp[i] = copy_source[i];

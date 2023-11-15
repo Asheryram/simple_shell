@@ -1,6 +1,51 @@
 #include "shell.h"
 
 /**
+ * expand_alias - expand the alias found in the command strings
+ *
+ * @arginv: args inventory
+ * Return: int
+ */
+int expand_alias(arg_in_ven_tory_t *arginv)
+{
+	alias_t *node;
+	tokens_t cmd_tokens;
+	unsigned int i;
+	char **commands;
+	unsigned int count = 0;
+
+	node = fetch_node_alias(arginv->alias, (char *)arginv->commands[0]);
+
+	if (node != NULL)
+	{
+		gen_token(&cmd_tokens, node->command);
+		count = 0;
+		while (arginv->commands[count] != NULL)
+		{
+			count++;
+		}
+		commands = safe_malloc((count + cmd_tokens.tokensN) * sizeof(char *));
+		for (i = count - 1; i >= 1; i--)
+		{
+			commands[i + cmd_tokens.tokensN - 1] =
+				(char *)arginv->commands[i];
+		}
+
+		for (i = 0; i < cmd_tokens.tokensN; i++)
+			commands[i] = _str_dupp((char *)cmd_tokens.tokens[i].str);
+		free(arginv->commands[0]);
+		free(arginv->commands);
+		commands[count + cmd_tokens.tokensN - 1] = NULL;
+		count = cmd_tokens.tokensN;
+		arginv->commands = commands;
+		del_tokens(&cmd_tokens);
+		return (count - 1);
+	}
+	return (0);
+}
+
+
+/**
  * _getpid - gets the pid and starts a new child precess
  *
  * Return: returns the pid of new child process
@@ -78,46 +123,3 @@ void expand_bash_vars(arg_in_ven_tory_t *arginv)
 			bash_replace(arginv, i);
 }
 
-/**
- * expand_alias - expand the alias found in the command strings
- *
- * @arginv: args inventory
- * Return: int
- */
-int expand_alias(arg_in_ven_tory_t *arginv)
-{
-	alias_t *node;
-	tokens_t cmd_tokens;
-	unsigned int i;
-	char **commands;
-	unsigned int count = 0;
-
-	node = fetch_node_alias(arginv->alias, (char *)arginv->commands[0]);
-
-	if (node != NULL)
-	{
-		gen_token(&cmd_tokens, node->command);
-		count = 0;
-		while (arginv->commands[count] != NULL)
-		{
-			count++;
-		}
-		commands = safe_malloc((count + cmd_tokens.tokensN) * sizeof(char *));
-		for (i = count - 1; i >= 1; i--)
-		{
-			commands[i + cmd_tokens.tokensN - 1] =
-				(char *)arginv->commands[i];
-		}
-
-		for (i = 0; i < cmd_tokens.tokensN; i++)
-			commands[i] = _str_dupp((char *)cmd_tokens.tokens[i].str);
-		free(arginv->commands[0]);
-		free(arginv->commands);
-		commands[count + cmd_tokens.tokensN - 1] = NULL;
-		count = cmd_tokens.tokensN;
-		arginv->commands = commands;
-		del_tokens(&cmd_tokens);
-		return (count - 1);
-	}
-	return (0);
-}

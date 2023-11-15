@@ -34,6 +34,8 @@ int locate_path(char *path, env_ment *env_list)
  *
  * Return: 0 if found, -1 if not found
  */
+
+ 
 int cat_path(char **search_path, char *cmd)
 {
 	int i, fd, len;

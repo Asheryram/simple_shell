@@ -1,5 +1,35 @@
 #include "shell.h"
 
+
+/**
+ * put_node_env_ment_ment - checks to see if node exists, and modifies it if so.
+ * @head: beginning of linked list
+ * @new_var: variable to modify
+ * @new_val: new string to be modified to found node
+ *
+ * Return: pointer to new node or NULL if fail
+ */
+int put_node_env_ment_ment(env_ment **head, char *new_var, char *new_val)
+{
+	env_ment *temp;
+
+	temp = *head;
+
+	while (temp)
+	{
+		if (_strg_com_pare(temp->var, new_var) == 0)
+		{
+			free(temp->val);
+			temp->val = _str_dupp(new_val);
+
+			return (EX_IT_SUC_CESS);
+		}
+		temp = temp->next;
+	}
+
+	return (EXT_FAILURE);
+}
+
 /**
  * add_node_env_ment_ment - adds new node to end of linked list
  * @head: beginning of linked list
@@ -35,33 +65,32 @@ env_ment *add_node_env_ment_ment(env_ment **head, char *var, char *val)
 	return (new_node);
 }
 
+
+
+
+
 /**
- * put_node_env_ment_ment - checks to see if node exists, and modifies it if so.
- * @head: beginning of linked list
- * @new_var: variable to modify
- * @new_val: new string to be modified to found node
+ * fetch_node - fetches a node of a given var
+ * @head: head of list
+ * @var: value to match of the node to fetch
  *
- * Return: pointer to new node or NULL if fail
+ * Return: fetched node or head
  */
-int put_node_env_ment_ment(env_ment **head, char *new_var, char *new_val)
+env_ment *fetch_node(env_ment *head, char *var)
 {
-	env_ment *temp;
+	env_ment *tmp;
 
-	temp = *head;
+	tmp = head;
 
-	while (temp)
+	while (tmp != NULL)
 	{
-		if (_strg_com_pare(temp->var, new_var) == 0)
-		{
-			free(temp->val);
-			temp->val = _str_dupp(new_val);
+		if (_strg_com_pare(tmp->var, var) == 0)
+			return (tmp);
 
-			return (EX_IT_SUC_CESS);
-		}
-		temp = temp->next;
+		tmp = tmp->next;
 	}
 
-	return (EXT_FAILURE);
+	return (NULL);
 }
 
 /**
@@ -98,28 +127,4 @@ int del_node_env_ment_ment(env_ment **head, char *var)
 	}
 
 	return (EXT_FAILURE);
-}
-
-/**
- * fetch_node - fetches a node of a given var
- * @head: head of list
- * @var: value to match of the node to fetch
- *
- * Return: fetched node or head
- */
-env_ment *fetch_node(env_ment *head, char *var)
-{
-	env_ment *tmp;
-
-	tmp = head;
-
-	while (tmp != NULL)
-	{
-		if (_strg_com_pare(tmp->var, var) == 0)
-			return (tmp);
-
-		tmp = tmp->next;
-	}
-
-	return (NULL);
 }

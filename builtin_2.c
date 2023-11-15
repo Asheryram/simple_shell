@@ -27,7 +27,7 @@ int _al_ias(arg_in_ven_tory_t *arginv)
 
 	combo = se_pa_rate_string(input);
 
-	if (modify_node_alias(&arginv->alias, combo[0], combo[1]) == EXT_FAILURE)
+	if (modify_node_alias(&arginv->alias, combo[0], combo[1]) == EX_IT_FAI_LURE)
 		add_node_alias(&arginv->alias, combo[0], combo[1]);
 
 	free(combo[0]);
@@ -63,7 +63,7 @@ int _un_al_ias(arg_in_ven_tory_t *arginv)
 	if (remove_node_alias(&arginv->alias, commands[1]) == EX_IT_SUC_CESS)
 		return (EX_IT_SUC_CESS);
 
-	return (EXT_FAILURE);
+	return (EX_IT_FAI_LURE);
 }
 
 /**

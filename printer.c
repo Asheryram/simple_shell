@@ -1,26 +1,6 @@
 #include "shell.h"
 
-/**
- * write_history - writes all elemets of history to file
- * @head: head of linked list to print
- *
- * Return: number of nodes printed
- */
-unsigned int write_history(history_t *head)
-{
-	unsigned int i = 0;
-
-	while (head)
-	{
-		write_uint(head->number);
-		write(STDOUT_FILENO, "  ", 2);
-		write(STDOUT_FILENO, head->command, _str_length(head->command));
-		head = head->next;
-		i++;
-	}
-
-	return (i);
-}
+/
 
 /**
  * write_uint - writes unsigned integers to buffer or stdout in decimal
@@ -97,5 +77,27 @@ size_t print_list(env_ment *head)
 	}
 
 	free(_env_mentiron);
+	return (i);
+}
+
+**
+ * write_history - writes all elemets of history to file
+ * @head: head of linked list to print
+ *
+ * Return: number of nodes printed
+ */
+unsigned int write_history(history_t *head)
+{
+	unsigned int i = 0;
+
+	while (head)
+	{
+		write_uint(head->number);
+		write(STDOUT_FILENO, "  ", 2);
+		write(STDOUT_FILENO, head->command, _str_length(head->command));
+		head = head->next;
+		i++;
+	}
+
 	return (i);
 }

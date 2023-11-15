@@ -48,6 +48,8 @@ interactive or non-interactive mode (explained in INVOCATION section).
 
 
 
+
+
 .SH INVOCATION
 
 to initialize simple_shell, you must compile all the included files using the GNU \
@@ -78,30 +80,48 @@ Commands may also be input into simple_shell through a file containing commands:
 
 
 
+
+
 .SH OPTIONS
 
 simple_shell does not take any options but does utilize the variable extern char \
 **environ.  This is currently part of the future goals of simple_shell
 
 
+
+
 .SS BUILT-IN COMMANDS
+
+
 
 .RS
 This secion has information on the included builtin commands with simple_shell
 
+
+
 .Bl -tag -width "PAGEIN" -compact -offset indent
+
+
 
 .It
 .B env
 - writes environment to stdout
 
+
+
 .IT
 .B setenv
 - sets or changes an environmental variable. example: 'setenv USER=bobby'
 
+
+
+
+
 .IT
 .B unsetenv
 - removes environmental variable. example: 'unsetenv USER'
+
+
 
 .IT
 .B history
@@ -112,22 +132,31 @@ This secion has information on the included builtin commands with simple_shell
 .B exit
 - exits simple_shell
 
+
 .IT
 .B cd
 - changes working directory
+
+
 
 .IT
 .B help
 - used with another command prints help message.  example: 'help env'
 
+
+
 .IT
 .B alias
 - creates an alias.  example 'alias ll='ls -la''
+
+
 
 .IT
 .B unalias
 - removes an alias.  example 'unalias ll'
 .RE
+
+
 
 
 .SH "SEE ALSO"

@@ -1,25 +1,6 @@
 #include "shell.h"
 
-/**
- * init_pipeline_count_processes - count amount of TO_KEN_STRING in a ptree
- * @tree: pointer to ptree
- *
- * Return: number of processes
- */
-unsigned int init_pipeline_count_processes(ptree_t *tree)
-{
-	if (!tree)
-		return (0);
 
-	if (re_di_rec_tion(tree->token_id))
-		return (1);
-
-	if (tree->token_id == TO_KEN_STRING)
-		return (1);
-
-	return (init_pipeline_count_processes(tree->left) +
-			init_pipeline_count_processes(tree->right));
-}
 
 /**
  * init_pipeline_push_processes - fetches everything & puts to pipeline struct
@@ -132,4 +113,25 @@ int delete_pipeline(pipeline_t *pipeline)
 	free(pipeline->processes);
 	pipeline->processes = NULL;
 	return (0);
+}
+
+/**
+ * init_pipeline_count_processes - count amount of TO_KEN_STRING in a ptree
+ * @tree: pointer to ptree
+ *
+ * Return: number of processes
+ */
+unsigned int init_pipeline_count_processes(ptree_t *tree)
+{
+	if (!tree)
+		return (0);
+
+	if (re_di_rec_tion(tree->token_id))
+		return (1);
+
+	if (tree->token_id == TO_KEN_STRING)
+		return (1);
+
+	return (init_pipeline_count_processes(tree->left) +
+			init_pipeline_count_processes(tree->right));
 }

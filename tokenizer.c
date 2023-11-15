@@ -1,5 +1,31 @@
 #include "shell.h"
 
+
+/**
+ * clean_to_kens - cleans up tokeniz functions
+ * @tokens: the gen_tokend tokens variable
+ * @tokens_idx: the index referring to the tokens
+ * @data: pointer used to store the data in tokens, only used in this
+ * function to free the memory there
+ */
+void clean_to_kens(tokens_t *tokens, unsigned int tokens_idx, char *data)
+{
+  unsigned int i;
+
+  tokens->tokensN = tokens_idx;
+  token_clasify(tokens);
+  del_dups(tokens);
+
+  if (tokens->tokensN)
+    {
+      if (tokens->tokens[tokens->tokensN - 1].id == TO_KEN_SE_MI_CO_LON)
+	tokens->tokensN--;
+      for (i = 0; i < tokens->tokensN; i++)
+	tokens->tokens[i].str = _str_dupp((char *)tokens->tokens[i].str);
+    }
+  free(data);
+}
+
 /**
  * gen_token - gen_tokens command string
  * @tokens: tokens_t struct containing initial string and array of strings
@@ -48,27 +74,4 @@ void gen_token(tokens_t *tokens, const char *string)
     }
   clean_to_kens(tokens, tokens_idx, data);
 }
-/**
- * clean_to_kens - cleans up tokeniz functions
- * @tokens: the gen_tokend tokens variable
- * @tokens_idx: the index referring to the tokens
- * @data: pointer used to store the data in tokens, only used in this
- * function to free the memory there
- */
-void clean_to_kens(tokens_t *tokens, unsigned int tokens_idx, char *data)
-{
-  unsigned int i;
 
-  tokens->tokensN = tokens_idx;
-  token_clasify(tokens);
-  del_dups(tokens);
-
-  if (tokens->tokensN)
-    {
-      if (tokens->tokens[tokens->tokensN - 1].id == TO_KEN_SE_MI_CO_LON)
-	tokens->tokensN--;
-      for (i = 0; i < tokens->tokensN; i++)
-	tokens->tokens[i].str = _str_dupp((char *)tokens->tokens[i].str);
-    }
-  free(data);
-}

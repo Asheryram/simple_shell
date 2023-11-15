@@ -41,10 +41,10 @@ int perm_ali_as(arg_in_ven_tory_t *arginv)
  */
 int up_load_al_ias(arg_in_ven_tory_t *arginv)
 {
-	ssize_t count;
-	size_t sz = BU_FFER_SIZE;
 	char *file, *buffer, *val;
 	int fd;
+	ssize_t count;
+	size_t sz = BU_FFER_SIZE;
 
 	file = arginv->alias_file;
 

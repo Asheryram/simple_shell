@@ -1,20 +1,23 @@
 #include "shell.h"
 
-/**
- * parse_error - prints parser error
- * @near: where the issue is at
- *
- * Return: 1 because of error
- */
-int parse_error(token_t *near)
-{
-	if (near)
-		_process_err("Parse error near\n");
-	else
-		_process_err("Parse error\n");
 
-	return (1);
+/**
+ * delete_parser - frees parser struct
+ * @parser: parser struct
+ *
+ * Return: 0;
+ */
+int delete_parser(parser_t *parser)
+{
+	if (!parser->tree)
+		return (0);
+
+	delete_ptree(parser->tree);
+	parser->tree = NULL;
+
+	return (0);
 }
+
 
 /**
  * parse_expr - operator precedence parser
@@ -102,19 +105,19 @@ int parse(parser_t *parser, tokens_t *tokens)
 	return (0);
 }
 
+
 /**
- * delete_parser - frees parser struct
- * @parser: parser struct
+ * parse_error - prints parser error
+ * @near: where the issue is at
  *
- * Return: 0;
+ * Return: 1 because of error
  */
-int delete_parser(parser_t *parser)
+int parse_error(token_t *near)
 {
-	if (!parser->tree)
-		return (0);
+	if (near)
+		_process_err("Parse error near\n");
+	else
+		_process_err("Parse error\n");
 
-	delete_ptree(parser->tree);
-	parser->tree = NULL;
-
-	return (0);
+	return (1);
 }

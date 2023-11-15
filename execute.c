@@ -41,7 +41,7 @@ int exec_builtins(arg_in_ven_tory_t *arginv)
 		{NULL, NULL}
 	};
 
-	retval = EXT_FAILURE;
+	retval = EX_IT_FAI_LURE;
 	commands = (char **)arginv->commands;
 
 	/* old_stdout = redirect_output(arginv, 0); */

@@ -1,59 +1,5 @@
 #include "shell.h"
 
-/**
- * _strn_cat - concatenates from src string to dest string
- * @dest: destination string
- * @src: source string
- * @n: number of bytes to concatenate
- *
- * Return: pointer to destination
- */
-char *_strn_cat(char *dest, char *src, int n)
-{
-	int i = 0, j = 0;
-
-	while (dest[i] != '\0')
-		i++;
-
-	while (j < n && src[j] != '\0')
-	{
-		dest[i] = src[j];
-		i++;
-		j++;
-	}
-
-	dest[i] = '\0';
-
-	return (dest);
-}
-
-/**
- * _strg_com_pare - compares string
- * @s1: first string
- * @s2: second string
- *
- * Return: difference between two ascii valuves
- */
-
-int _strg_com_pare(const char *s1, const char *s2)
-{
-	int i;
-
-	i = 0;
-
-	while (TRUE_THY)
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-
-		if (s1[i] == '\0' || s2[i] == '\0')
-			break;
-
-		i++;
-	}
-
-	return (0);
-}
 
 /**
  * _str_length - finds and returns length of string
@@ -97,6 +43,34 @@ char *_str_dupp(char *str)
 }
 
 /**
+ * _strn_cat - concatenates from src string to dest string
+ * @dest: destination string
+ * @src: source string
+ * @n: number of bytes to concatenate
+ *
+ * Return: pointer to destination
+ */
+char *_strn_cat(char *dest, char *src, int n)
+{
+	int i = 0, j = 0;
+
+	while (dest[i] != '\0')
+		i++;
+
+	while (j < n && src[j] != '\0')
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+
+	dest[i] = '\0';
+
+	return (dest);
+}
+
+
+/**
  * _strng_com_pare - checks if 2 strings are of equal value and length
  * @s1: first string
  * @s2: second string
@@ -111,6 +85,35 @@ int _strng_com_pare(char *s1, char *s2, unsigned int n)
 	for (j = 0; j < n; j++)
 		if (s1[j] != s2[j])
 			return (s1[j] - s2[j]);
+
+	return (0);
+}
+
+
+/**
+ * _strg_com_pare - compares string
+ * @s1: first string
+ * @s2: second string
+ *
+ * Return: difference between two ascii valuves
+ */
+
+int _strg_com_pare(const char *s1, const char *s2)
+{
+	int i;
+
+	i = 0;
+
+	while (TRUE_THY)
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+
+		if (s1[i] == '\0' || s2[i] == '\0')
+			break;
+
+		i++;
+	}
 
 	return (0);
 }

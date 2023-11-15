@@ -1,26 +1,45 @@
 #include "shell.h"
 
 /**
- * process_exe_cute_core - this is the cor e execution function
- * @arginv: arg inventory
+ * process_exe_cute - exe_cutes background process
+ * @arginv: arginv
  *
- * Return: 0
+ * Return: 0 or exit
  */
-pid_t process_exe_cute_core(arg_in_ven_tory_t *arginv)
+int process_exe_cute(arg_in_ven_tory_t *arginv)
 {
-	unsigned int i;
-	ptree_t *ptree;
+	pid_t last_pid;
+	int status = 0;
 
-	for (i = 0; i < arginv->pipeline.processesN; i++)
+	arginv->n_bg_jobs = 0;
+
+	last_pid = process_exe_cute_tree(arginv, arginv->parser.tree, 0);
+
+	if (last_pid != -1)
 	{
-		ptree = arginv->pipeline.processes[i].ptree;
-		arginv->commands = ptree->strings;
-		ptree->stringsN += expand_alias(arginv);
-		ptree->strings = arginv->commands;
-		arginv->pipeline.processes[i].pid = exe_cute(arginv);
+		if (arginv->parser.tree->token_id != TO_KEN_BACK_GROUND)
+		{
+			waitpid(last_pid, &status, 0);
+			status = WEXITSTATUS(status);
+		}
+		else
+		{
+			arginv->n_bg_jobs++;
+			arginv->last_bg_pid = last_pid;
+		}
+		switch (status)
+		{
+		case 1:
+			arginv->exit_status = 127;
+			break;
+		default:
+			arginv->exit_status = status;
+			break;
+		}
 	}
-	return (arginv->pipeline.processes[arginv->pipeline.processesN - 1].pid);
+	return (0);
 }
+
 
 /**
  * process_exe_cute_tree - this exe_cutes ptree
@@ -73,42 +92,25 @@ pid_t process_exe_cute_tree(arg_in_ven_tory_t *arginv, ptree_t *ptree,
 	return (last_pid);
 }
 
+
 /**
- * process_exe_cute - exe_cutes background process
- * @arginv: arginv
+ * process_exe_cute_core - this is the cor e execution function
+ * @arginv: arg inventory
  *
- * Return: 0 or exit
+ * Return: 0
  */
-int process_exe_cute(arg_in_ven_tory_t *arginv)
+pid_t process_exe_cute_core(arg_in_ven_tory_t *arginv)
 {
-	pid_t last_pid;
-	int status = 0;
+	unsigned int i;
+	ptree_t *ptree;
 
-	arginv->n_bg_jobs = 0;
-
-	last_pid = process_exe_cute_tree(arginv, arginv->parser.tree, 0);
-
-	if (last_pid != -1)
+	for (i = 0; i < arginv->pipeline.processesN; i++)
 	{
-		if (arginv->parser.tree->token_id != TO_KEN_BACK_GROUND)
-		{
-			waitpid(last_pid, &status, 0);
-			status = WEXITSTATUS(status);
-		}
-		else
-		{
-			arginv->n_bg_jobs++;
-			arginv->last_bg_pid = last_pid;
-		}
-		switch (status)
-		{
-		case 1:
-			arginv->exit_status = 127;
-			break;
-		default:
-			arginv->exit_status = status;
-			break;
-		}
+		ptree = arginv->pipeline.processes[i].ptree;
+		arginv->commands = ptree->strings;
+		ptree->stringsN += expand_alias(arginv);
+		ptree->strings = arginv->commands;
+		arginv->pipeline.processes[i].pid = exe_cute(arginv);
 	}
-	return (0);
+	return (arginv->pipeline.processes[arginv->pipeline.processesN - 1].pid);
 }
