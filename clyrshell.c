@@ -6,15 +6,16 @@
 int main(void)
 {
     char cmmd[1024];
+     char *command = strdup(cmmd);
 
     while (1)
     {
 		prompt_dollar_display();
         read_cmmd (cmmd,sizeof(cmmd) );
 
-        char *command = strdup(cmmd);
+       
         if (command == NULL) {
-            write_str("Memory allocation error\n");
+            clyr_print("Memory allocation error\n");
             _exit(EXIT_FAILURE);
         }
 
