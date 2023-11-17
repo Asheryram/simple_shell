@@ -1,13 +1,10 @@
 #include "clyrshell.h"
 /**
- * const char *cmmd
  * 
- *  This 
+ *This file is for execution 
+ *
  */
-* This file is for execution 
-
-*/
-void cmmd_execution()
+void cmmd_execution(char *cmmd)
 {
     pid_t p_pid = fork();
 
@@ -15,21 +12,26 @@ void cmmd_execution()
     {
     case -1:
         perror("fork");
-        exit(EXIT_FAILURE);
+        _exit(EXIT_FAILURE);
         break;
     case 0:
     {
-       
-        char *argv[2];
-        argv[0] ="/bin/sh";
-        argv[1] = NULL;
-        execve(argv[0], argv, NULL);
-        perror("execve");
-        exit(EXIT_FAILURE);
+
+        char *args[] = {cmmd, NULL};
+        if (execve(command, args, NULL) == -1)
+        {
+            perror("execve");
+            _exit(EXIT_FAILURE);
+        }
         break;
     }
     default:
-        wait(NULL);
+        int status;
+        if (waitpid(pid, &status, 0) == -1)
+        {
+            perror("waitpid");
+            _exit(EXIT_FAILURE);
+        }
         break;
     }
 }

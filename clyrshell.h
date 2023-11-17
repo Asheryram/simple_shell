@@ -9,6 +9,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <sys/types.h>
 
 
  /**
@@ -25,7 +26,7 @@
  */
 void prompt_dollar_display(void);
 void  read_cmmd (char *cmmd,size_t s );
-void cmmd_execution(const char *cmmd);
+void cmmd_execution(char *cmmd);
 void clyr_print(const char *m);
 
 

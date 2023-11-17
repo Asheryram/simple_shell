@@ -5,7 +5,7 @@
 */
 int main(void)
 {
-    char cmmd[128];
+    char cmmd[1024];
 
     while (1)
     {
