@@ -13,12 +13,14 @@ void cmmd_execution(const char *cmmd)
         exit(EXIT_FAILURE);
         break;
     case 0:
+    {
         char *args[] = { (char *)cmmd, NULL };
         char *envp[] = { NULL };
         execve(cmmd, args, envp);
         perror("execve");
         exit(EXIT_FAILURE);
         break;
+    }
     default:
         wait(NULL);
         break;
