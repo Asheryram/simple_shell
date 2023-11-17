@@ -14,10 +14,11 @@ void cmmd_execution(const char *cmmd)
         break;
     case 0:
     {
-        char *cmd_casted = (char *)cmmd; 
-        char *args[] = { cmd_casted, NULL };
-        char *envp[] = { NULL };
-        execve(cmmd, args, envp);
+       
+        char *argv[2];
+        argv[0] ="/bin/sh";
+        argv[1] = NULL;
+        execve(argv[0], argv, NULL);
         perror("execve");
         exit(EXIT_FAILURE);
         break;
