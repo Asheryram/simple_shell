@@ -1,6 +1,9 @@
 #include "clyrshell.h"
-
-void cmmd_execution(const char *cmmd){
+/*
+* This file is for execution 
+*/
+void cmmd_execution(const char *cmmd)
+{
     pid_t p_pid = fork();
 
     switch (p_pid)
@@ -10,8 +13,10 @@ void cmmd_execution(const char *cmmd){
         exit(EXIT_FAILURE);
         break;
     case 0:
-        execlp(cmmd,cmmd,(char *)NULL);
-        perror("exelp");
+        char *args[] = { (char *)cmmd, NULL };
+        char *envp[] = { NULL };
+        execve(cmmd, args, envp);
+        perror("execve");
         exit(EXIT_FAILURE);
         break;
     default:

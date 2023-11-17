@@ -1,10 +1,15 @@
 #include "clyrshell.h"
 
-int main(void){
+/**
+* This is the main entery point
+*/
+int main(void)
+{
     char cmmd[128];
 
-    while (1){
-        prompt_dollar_display();
+    while (1)
+    {
+		prompt_dollar_display();
         read_cmmd (cmmd,sizeof(cmmd) );
         cmmd_execution(cmmd);
     }
