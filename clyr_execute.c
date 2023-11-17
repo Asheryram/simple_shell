@@ -1,8 +1,13 @@
 #include "clyrshell.h"
-/*
+/**
+ * const char *cmmd
+ * 
+ *  This 
+ */
 * This file is for execution 
+
 */
-void cmmd_execution(const char *cmmd)
+void cmmd_execution()
 {
     pid_t p_pid = fork();
 
