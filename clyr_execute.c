@@ -14,7 +14,8 @@ void cmmd_execution(const char *cmmd)
         break;
     case 0:
     {
-        char *args[] = { (char *)cmmd, NULL };
+        const char *cmd_casted = cmmd;  
+        char *args[] = { (char *)cmd_casted, NULL };
         char *envp[] = { NULL };
         execve(cmmd, args, envp);
         perror("execve");
