@@ -15,7 +15,7 @@ void cmmd_execution(const char *cmmd)
     case 0:
     {
         const char *cmd_casted = cmmd;  
-        char *args[] = { (char *)cmd_casted, NULL };
+        char *args[] = { cmd_casted, NULL };
         char *envp[] = { NULL };
         execve(cmmd, args, envp);
         perror("execve");
