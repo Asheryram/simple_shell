@@ -7,6 +7,7 @@
 void cmmd_execution(char *cmmd)
 {
     pid_t p_pid = fork();
+    int status;
 
     switch (p_pid)
     {
@@ -18,7 +19,7 @@ void cmmd_execution(char *cmmd)
     {
 
         char *args[] = {cmmd, NULL};
-        if (execve(command, args, NULL) == -1)
+        if (execve(cmmd, args, NULL) == -1)
         {
             perror("execve");
             _exit(EXIT_FAILURE);
@@ -26,8 +27,8 @@ void cmmd_execution(char *cmmd)
         break;
     }
     default:
-        int status;
-        if (waitpid(pid, &status, 0) == -1)
+      
+        if (waitpid(p_pid, &status, 0) == -1)
         {
             perror("waitpid");
             _exit(EXIT_FAILURE);
