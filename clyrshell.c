@@ -11,7 +11,15 @@ int main(void)
     {
 		prompt_dollar_display();
         read_cmmd (cmmd,sizeof(cmmd) );
+
+        char *command = strdup(cmmd);
+        if (command == NULL) {
+            write_str("Memory allocation error\n");
+            _exit(EXIT_FAILURE);
+        }
+
         cmmd_execution(cmmd);
+        free(command);
     }
 
     return 0; 
